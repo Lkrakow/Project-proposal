@@ -4,7 +4,6 @@
 
 import numpy as np
 import pandas as pd
-import matplotlib as plt
 
 '''Sorting of first data file'''
 '''Importing csv file"'''
@@ -92,13 +91,15 @@ print(average_tempanomaly_per_year)
 tempanomaly = average_tempanomaly_per_year
 
 '''Setting Year as index'''
-tempanomaly = tempanomaly.drop(df.index[141:145])
+tempanomaly = tempanomaly.drop(tempanomaly.index[141:145])
 tempanomaly = tempanomaly.set_index('year')
 print(tempanomaly)
 
 '''Both our data are sorted per year and have the same shape'''
 
+'''Merging the two datasets'''
 Final = pd.merge(sealevel, tempanomaly, on='year')
 print(Final)
-
+'''creating a plot of average temperature anomaly vs average sea level & saving the new dataset'''
 Final.plot.scatter(x="average_tempanomaly_per_year", y="average_sea_level")
+Final.to_csv
