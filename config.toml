@@ -1,0 +1,5 @@
+[init_csv]
+file_name1_default_location = "C:\\Users\\Windows\\pythonproject\\Project-proposal\\sea-level.csv"
+file_name2_default_location = "C:\\Users\\Windows\\pythonproject\\Project-proposal\\global-monthly-temp-anomaly.csv"
+column_drop_default_index1 = "0134"
+column_drop_default_index2 = "01"
