@@ -5,49 +5,52 @@
 import numpy as np
 import pandas as pd
 
-'''Sorting of first data file'''
-'''Importing csv file"'''
-file_name = r"C:\Users\Windows\Downloads\sea-level.csv"
 
-'''Reading csv file, removing first three rows'''
-sealevel = pd.read_csv(file_name)
-print(sealevel)
+def sorting_dataset(file):
+    '''Sorting of first data file'''
+    '''Importing csv file"'''
+    file_name = file
 
-'''Sorting data
+    '''Reading csv file, removing first three rows'''
+    sealevel = pd.read_csv(file_name)
+    print(sealevel)
 
-Removing unnecessary columns
-data.drop(['Name of column'], axis=1)
+    '''Sorting data
 
-Renaming columns
-df = pd.Dataframe(data)
-df.rename(columns={'Old name':'New name'})'''
+    Removing unnecessary columns
+    data.drop(['Name of column'], axis=1)
 
-sealevel = sealevel.drop(['Entity','Code','Global sea level according to Church and White (2011)','Global sea level according to UHSLC'], axis=1)
-sealevel = pd.DataFrame(sealevel)
-sealevel.rename(columns={'Global sea level as an average of Church and White (2011) and UHSLC data': 'Sea level'}, inplace=True)
-sealevel.rename(columns={'Day': 'Time'}, inplace=True)
-print(sealevel)
+    Renaming columns
+    df = pd.Dataframe(data)
+    df.rename(columns={'Old name':'New name'})'''
 
-'''Checking the data type'''
-sealevel.info()
+    sealevel = sealevel.drop(['Entity','Code','Global sea level according to Church and White (2011)','Global sea level according to UHSLC'], axis=1)
+    sealevel = pd.DataFrame(sealevel)
+    sealevel.rename(columns={'Global sea level as an average of Church and White (2011) and UHSLC data': 'Sea level'}, inplace=True)
+    sealevel.rename(columns={'Day': 'Time'}, inplace=True)
+    # print(sealevel)
 
-'''Converting values for Time to datetime'''
-sealevel['Time'] = pd.to_datetime(sealevel['Time'], errors='coerce')
-sealevel.info()
+    '''Checking the data type'''
+    # sealevel.info()
 
-'''Averaging sea level per year'''
-print("NaT values in 'Time' column:", sealevel['Time'].isna().sum())
-sealevel['year'] = sealevel['Time'].dt.year
-print(sealevel)
-average_sealevel_per_year = sealevel.groupby('year')['Sea level'].mean().reset_index()
-average_sealevel_per_year.columns = ['year', 'average_sea_level']
-print(average_sealevel_per_year)
-sealevel = average_sealevel_per_year
+    '''Converting values for Time to datetime'''
+    sealevel['Time'] = pd.to_datetime(sealevel['Time'], errors='coerce')
+    # sealevel.info()
 
-'''Setting Year as index'''
-sealevel = sealevel.set_index('year')
-print(sealevel)
-'''Our data for sea level is sorted per average per year'''
+    '''Averaging sea level per year'''
+    print("NaT values in 'Time' column:", sealevel['Time'].isna().sum())
+    sealevel['year'] = sealevel['Time'].dt.year
+    print(sealevel)
+    average_sealevel_per_year = sealevel.groupby('year')['Sea level'].mean().reset_index()
+    average_sealevel_per_year.columns = ['year', 'average_sea_level']
+    print(average_sealevel_per_year)
+    sealevel = average_sealevel_per_year
+
+    '''Setting Year as index'''
+    sealevel = sealevel.set_index('year')
+    '''Our data for sea level is sorted per average per year''' 
+    return sealevel
+
 
 
 
