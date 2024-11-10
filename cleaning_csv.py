@@ -13,7 +13,7 @@ def drop_columns(file: pd.DataFrame, config: dict, config_key: str) -> pd.DataFr
     
     headers_file = list(file.columns)
     print(headers_file)
-    to_keep: str = input("Give us the index of the columns to remove. (e.g. input \"23\" to keep column remove 2 and 3)")
+    to_keep: str = input("Give us the index of the columns to remove. (e.g. input \"23\" to remove column 2 and 3)")
     if (to_keep == ""):
         to_keep = config["init_csv"][config_key]
     how_many: int = len(to_keep)
