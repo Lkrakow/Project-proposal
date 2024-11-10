@@ -30,32 +30,43 @@ Link: https://ourworldindata.org/grapher/global-monthly-temp-anomaly
 
 * How to use
 
-The first step is to import and read the datasets using the function "importing_csv_file"
+The first part of the project deals with the import of the csv files needed:
+
+The first step is to import the csv file sing the function get_names
 
     The user is expected to enter a valid file_path in the terminal in order to access the csv file
 
-    Location first file
-    Location second file
+    Example:
+    
+    Give first location
+    Give second location
 
+    If the user omits to put in a csv file, a default csv will be used using the config function
 
-The second step is to drop the columns that will not be used
+The second step is to read the csv file using the importing_csv_file function
 
-    The user has to provide the index of the columns he/she wishes to drop
+At this point: both dataset should be imported and read which leads to the second part of this project: the data cleaning:
+
+The first step is to drop the columns which will not be necessary using the function drop_columns. In the case of this project, we wish to ony look at columns containing a date and the data we ar looking at: sea-level or temperature anomaly. This functions requires for the user to give the index of the columns they wish to drop and will rename the columns for both datasets as being 'time' and 'data(1or 2)' If the user does not input an index columns of a certain integers will automatically be dropped leaving only the time and data columns.
+
+    Example:
 
     ['Entity', 'Code', 'Day', 'Global sea level according to Church and White (2011)', 'Global sea level according to UHSLC', 'Global sea level as an average of Church and White (2011) and UHSLC data']
-    Give us the index of the columns to remove. (e.g. input "23" to keep column remove 2 and 3)
+    Give us the index of the columns to remove. (e.g. input "23" to remove column 2 and 3)
     ['Day', 'Global sea level as an average of Church and White (2011) and UHSLC data']
     ['Entity', 'Code', 'Day', 'Global warming: monthly temperature anomaly']
-    Give us the index of the columns to remove. (e.g. input "23" to keep column remove 2 and 3)
+    Give us the index of the columns to remove. (e.g. input "23" to remove column 2 and 3)
     ['Day', 'Global warming: monthly temperature anomaly']
 
+The second step is to to convert the time variable into a datetime type in order to manipulate it later on in the project. 
 
-The third step is to set the Time data type as datetime
+Here the cleaning of the data is done and now it has to be merged into a single dataset:
 
-    In this step, the user is expected to provide the index of the columns they wish to drop
+The first step is to extract each datsets limits in terms of year because we can only merge two datsets of the same size using the function . This is done using the function get_date_limits 
 
+The second step is to create a merge dataset table which will have the right limits in order for both data to be available initialise_merged_data_set. Thid creates a table with year and two empty columns data1 and data2
 
- 
+The third and last step is to use the function fill_merged_set to fill in the data with the ata from the csv. In order to do so we need to average the values per year because in the sealevel dataset we have data for four month a year and in the temperature anomaly dataset we have data for each twelve month. Therefore, for the format of both dataset to be identical so it can be compared we average the values per year then fill them in the table. 
 
 * What can this project be used for?
 
